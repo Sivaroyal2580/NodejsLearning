@@ -35,10 +35,9 @@ db.once('open',()=>{
 
 const newCourse = new Course({
     title: 'Node.js Basics',
-    instructor: 'John Doe',
+    instructor: 'show',
     duration: 60,
   });
-  
   newCourse.save()
     .then(() => {
       console.log('Course saved successfully');
