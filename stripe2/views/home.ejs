@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Gateway Demo</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <h3>Welcome to Payment Gateway</h3>
+  <form action="/create-payment-intent" method="POST" id="payment-form">
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" placeholder="Amount (e.g., 2500)" required /><br>
+
+    <label for="currency">Currency:</label>
+    <input type="text" id="currency" name="currency" placeholder="Currency (e.g., usd)" required /><br>
+
+    <label for="payment-method">Payment Method:</label>
+    <select id="payment-method" name="payment-method" required>
+      <option value="card">Credit/Debit Card</option>
+      <option value="paypal">PayPal</option>
+    </select><br>
+
+    <div id="card-container">
+      <label for="card-element">
+        Credit or debit card:
+      </label>
+      <div id="card-element">
+        <!-- A Stripe Element will be inserted here for card payments. -->
+      </div>
+      <!-- Used to display card form errors. -->
+      <div id="card-errors" role="alert"></div>
+    </div>
+
+    <div id="paypal-container" style="display: none;">
+      <!-- Placeholder for PayPal button or form -->
+    </div>
+
+    <button type="submit">Pay</button>
+  </form>
+
+  <script>
+    var stripe = Stripe('pk_test_51NvHLVSAo8mos9lRWSaTtfNH4vmZ6ZhpZ9e7MJyZz7U80pM1cpPOPH6dv1yca6d2t6TNSn3xp5tKbI09zUtjYd2Y00TgGK7veJ');
+    var elements = stripe.elements();
+
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+    
+    var form = document.getElementById('payment-form');
+    var paymentMethodSelector = document.getElementById('payment-method');
+    var cardContainer = document.getElementById('card-container');
+    var paypalContainer = document.getElementById('paypal-container');
+
+    // Handle the change of payment method selection
+    paymentMethodSelector.addEventListener('change', function(event) {
+      var selectedMethod = event.target.value;
+      if (selectedMethod === 'card') {
+        cardContainer.style.display = 'block';
+        paypalContainer.style.display = 'none';
+      } else if (selectedMethod === 'paypal') {
+        cardContainer.style.display = 'none';
+        paypalContainer.style.display = 'block';
+        // You can include PayPal integration code here (e.g., PayPal Smart Buttons).
+      }
+    });
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      if (paymentMethodSelector.value === 'card') {
+        stripe.createToken(card).then(function(result) {
+          if (result.error) {
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+          } else {
+            stripeTokenHandler(result.token);
+          }
+        });
+      } else if (paymentMethodSelector.value === 'paypal') {
+        // Handle PayPal payment submission here.
+        // You can use the PayPal JavaScript SDK to integrate PayPal payments.
+      }
+    });
+
+    function stripeTokenHandler(token) {
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripeToken');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+      form.submit();
+    }
+  </script>
+</body>
+</html>
