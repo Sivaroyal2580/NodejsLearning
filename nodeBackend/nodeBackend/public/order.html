@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Form</title>
+  
+</head>
+<body>
+  <h1 style="color:blueviolet"> </h1>
+  <form action="/api/orders" method="post">
+   
+    <label for="shippingAddress">Shipping Address:</label>
+    <input type="text" id="shippingAddress" name="shippingAddress" required><br><br>
+
+    <!-- Order Items (Array) -->
+    <div id="itemsContainer">
+      <div class="item">
+        <label for="itemId1">Item ID:</label>
+        <input type="text" id="itemId1" name="items[0][id]" required><br><br>
+
+        <label for="itemTitle1">Item Title:</label>
+        <input type="text" id="itemTitle1" name="items[0][title]" required><br><br>
+
+        <label for="itemPrice1">Item Price:</label>
+        <input type="text" id="itemPrice1" name="items[0][price]" required><br><br>
+
+        <label for="itemQuantity1">Item Quantity:</label>
+        <input type="text" id="itemQuantity1" name="items[0][quantity]" required><br><br>
+
+        <label for="itemStatus1">Item Status:</label>
+        <input type="text" id="itemStatus1" name="items[0][status]" required><br><br>
+      </div>
+    </div>
+
+    <button style="color:rgb(204, 0, 255)" type="button" onclick="addItem()">Add Item</button><br><br>
+
+    <hr>
+
+    <!-- Other Order Details -->
+    <label for="paymentMethod">Payment Method:</label>
+    <input type="text"  id="paymentMethod" name="paymentMethod" required><br><br>
+
+    <label for="totalMRP">Total MRP:</label>
+    <input type="text" id="totalMRP" name="totalMRP" required><br><br>
+
+    <label for="totalDiscount">Total Discount:</label>
+    <input type="text" id="totalDiscount" name="totalDiscount" required><br><br>
+
+    <label for="totalAmountPayable">Total Amount Payable:</label>
+    <input type="text" id="totalAmountPayable" name="totalAmountPayable" required><br><br>
+
+    <button type="submit">Submit Order</button>
+  </form>
+
+  <script>
+   let itemCounter = 1;
+
+    function addItem() {
+      const itemsContainer = document.getElementById('itemsContainer');
+      const newItem = document.createElement('div');
+      newItem.classList.add('item');
+
+      newItem.innerHTML = `
+        <label for="itemId${itemCounter}">Item ID:</label>
+        <input type="text" id="itemId${itemCounter}" name="items[${itemCounter}][id]" required><br><br>
+
+        <label for="itemTitle${itemCounter}">Item Title:</label>
+        <input type="text" id="itemTitle${itemCounter}" name="items[${itemCounter}][title]" required><br><br>
+
+        <label for="itemPrice${itemCounter}">Item Price:</label>
+        <input type="text" id="itemPrice${itemCounter}" name="items[${itemCounter}][price]" required><br><br>
+
+        <label for="itemQuantity${itemCounter}">Item Quantity:</label>
+        <input type="text" id="itemQuantity${itemCounter}" name="items[${itemCounter}][quantity]" required><br><br>
+
+        <label for="itemStatus${itemCounter}">Item Status:</label>
+        <input type="text" id="itemStatus${itemCounter}" name="items[${itemCounter}][status]" required><br><br>
+      `;
+
+      itemsContainer.appendChild(newItem);
+      itemCounter++;
+    }
+  </script>
+</body>
+</html>
