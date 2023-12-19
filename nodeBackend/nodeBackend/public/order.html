@@ -4,42 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Form</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8fcfd;
+      margin: 0;
+      padding: 0;
+    }
+  
+    h1 {
+      color: #52288a;
+      text-align: center;
+    }
+  
+    #example2 {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #333;
+    }
+  
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+  
+    button {
+      background-color: #2980b9;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button:hover {
+      background-color: #2980b9;
+    }
+  
+    .item {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+  </style>
   
 </head>
-<body>
-  <h1 style="color:blueviolet"> </h1>
-  <form action="/api/orders" method="post">
-   
+
+<body id="example1">
+  <h1>Order Form</h1>
+  <form id="example2" action="/api/orders" method="post">
     <label for="shippingAddress">Shipping Address:</label>
     <input type="text" id="shippingAddress" name="shippingAddress" required><br><br>
 
     <!-- Order Items (Array) -->
     <div id="itemsContainer">
-      <div class="item">
-        <label for="itemId1">Item ID:</label>
-        <input type="text" id="itemId1" name="items[0][id]" required><br><br>
+      <div class="item" id="item0">
+        <label for="itemId0">Item ID:</label>
+        <input type="text" id="itemId0" name="items[0][id]" required><br><br>
 
-        <label for="itemTitle1">Item Title:</label>
-        <input type="text" id="itemTitle1" name="items[0][title]" required><br><br>
+        <label for="itemTitle0">Item Title:</label>
+        <input type="text" id="itemTitle0" name="items[0][title]" required><br><br>
 
-        <label for="itemPrice1">Item Price:</label>
-        <input type="text" id="itemPrice1" name="items[0][price]" required><br><br>
+        <label for="itemPrice0">Item Price:</label>
+        <input type="text" id="itemPrice0" name="items[0][price]" required><br><br>
 
-        <label for="itemQuantity1">Item Quantity:</label>
-        <input type="text" id="itemQuantity1" name="items[0][quantity]" required><br><br>
+        <label for="itemQuantity0">Item Quantity:</label>
+        <input type="text" id="itemQuantity0" name="items[0][quantity]" required><br><br>
 
-        <label for="itemStatus1">Item Status:</label>
-        <input type="text" id="itemStatus1" name="items[0][status]" required><br><br>
+        <label for="itemStatus0">Item Status:</label>
+        <input type="text" id="itemStatus0" name="items[0][status]" required><br><br>
       </div>
     </div>
 
-    <button style="color:rgb(204, 0, 255)" type="button" onclick="addItem()">Add Item</button><br><br>
+    <button  type="button" onclick="addItem()">Add Item</button><br><br>
 
-    <hr>
+  
 
     <!-- Other Order Details -->
     <label for="paymentMethod">Payment Method:</label>
-    <input type="text"  id="paymentMethod" name="paymentMethod" required><br><br>
+    <input type="text" id="paymentMethod" name="paymentMethod" required><br><br>
 
     <label for="totalMRP">Total MRP:</label>
     <input type="text" id="totalMRP" name="totalMRP" required><br><br>
@@ -54,12 +110,13 @@
   </form>
 
   <script>
-   let itemCounter = 1;
+    let itemCounter = 1;
 
     function addItem() {
       const itemsContainer = document.getElementById('itemsContainer');
       const newItem = document.createElement('div');
       newItem.classList.add('item');
+      newItem.id = `item${itemCounter}`;
 
       newItem.innerHTML = `
         <label for="itemId${itemCounter}">Item ID:</label>
