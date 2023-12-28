@@ -18,21 +18,9 @@
 
             </div>
         </div>
-        <button type="button" onclick="addProduct()">Add Product</button>
         <button type="submit">Submit Wishlist</button>
     </form>
 
-    <script>
-        function addProduct() {
-            const productsContainer = document.getElementById('productsContainer');
-            const newProduct = document.createElement('div');
-            newProduct.classList.add('product');
-            newProduct.innerHTML = `
-                <label for="productId${productsContainer.children.length + 1}">Product ID:</label>
-                <input type="text" class="product-id" name="productIds[]" required><br><br>
-            `;
-        }
-    </script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@ const SECRET_KEY = 'bjsdhbjdmb5878jhmnd';
  * /auth/register:
  *   post:
  *     summary: Register a new user.
- *     description: Register a new user by providing user details.
+ *     description: Register a new user by providing user deta
  *     tags:
  *       - Authentication
  *     requestBody:

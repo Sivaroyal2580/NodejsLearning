@@ -89,10 +89,6 @@
       </div>
     </div>
 
-    <button  type="button" onclick="addItem()">Add Item</button><br><br>
-
-  
-
     <!-- Other Order Details -->
     <label for="paymentMethod">Payment Method:</label>
     <input type="text" id="paymentMethod" name="paymentMethod" required><br><br>
@@ -109,35 +105,6 @@
     <button type="submit">Submit Order</button>
   </form>
 
-  <script>
-    let itemCounter = 1;
-
-    function addItem() {
-      const itemsContainer = document.getElementById('itemsContainer');
-      const newItem = document.createElement('div');
-      newItem.classList.add('item');
-      newItem.id = `item${itemCounter}`;
-
-      newItem.innerHTML = `
-        <label for="itemId${itemCounter}">Item ID:</label>
-        <input type="text" id="itemId${itemCounter}" name="items[${itemCounter}][id]" required><br><br>
-
-        <label for="itemTitle${itemCounter}">Item Title:</label>
-        <input type="text" id="itemTitle${itemCounter}" name="items[${itemCounter}][title]" required><br><br>
-
-        <label for="itemPrice${itemCounter}">Item Price:</label>
-        <input type="text" id="itemPrice${itemCounter}" name="items[${itemCounter}][price]" required><br><br>
-
-        <label for="itemQuantity${itemCounter}">Item Quantity:</label>
-        <input type="text" id="itemQuantity${itemCounter}" name="items[${itemCounter}][quantity]" required><br><br>
-
-        <label for="itemStatus${itemCounter}">Item Status:</label>
-        <input type="text" id="itemStatus${itemCounter}" name="items[${itemCounter}][status]" required><br><br>
-      `;
-
-      itemsContainer.appendChild(newItem);
-      itemCounter++;
-    }
-  </script>
+ 
 </body>
 </html>

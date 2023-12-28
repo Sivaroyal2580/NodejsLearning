@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+<style>
+
+#example1{
+  width:100px;
+  height: auto;
+  
+}
+
+#example2{
+  width:30px;
+  height: auto;
+}
+
+.products{
+  max-width: 150px;
+      margin: 0 auto;
+      background-color: #eaf3f2;
+      padding: 20px;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      float: left;
+}
+
+</style>
+</head>
+<body>
+   <div class="products">
+  <img id="example1" src="https://cdn0.rubylane.com/shops/arnoldjewelers/rbx20Diamondx20Cutx20Banglex20Bracelet.1L.jpg?15" alt="Product Image" class="product-image"><br><br>
+  <a href="wishlist.html"> <img id="example2" src="https://cdn4.iconfinder.com/data/icons/e-commerce-ui-outline/64/ecommerce_-_love_favorite-512.png"> </a>
+  <button  type="button" onclick="navigateToOrderPage()">   BUY </button>
+  
+  <h2>Gold bangle</h2>
+  <p> Price: <strike>Rs.25,200.00 </strike> Rs.24,000.00</p>
+</div>
+
+<script>
+  function navigateToOrderPage() {
+    window.location.href = 'order.html'; 
+  }
+  
+</script>
+</body>
+</html>
